@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Join the ride — Tour Tracker</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      text-align: center;
+    }
+    h1 { font-size: 28px; margin: 0 0 4px; }
+    .sub { color: #64748b; margin: 0 0 28px; }
+    .btn {
+      display: inline-block;
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 14px 28px;
+      margin-bottom: 24px;
+    }
+    .code { font-size: 15px; color: #475569; }
+    .code b { font-size: 22px; letter-spacing: 4px; color: #0f172a; }
+    .hint { color: #94a3b8; font-size: 13px; max-width: 340px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>🏍️ Tour Tracker</h1>
+  <p class="sub">You're invited to a ride!</p>
+  <a id="open" class="btn" href="#">Open Tour Tracker</a>
+  <p class="code">Tour code: <b id="code">——————</b></p>
+  <p class="hint">
+    If the app doesn't open, install Tour Tracker first, then open it and
+    enter the code above under "Join your friends".
+  </p>
+  <script>
+    var code = (new URLSearchParams(location.search).get("code") || "").toUpperCase();
+    if (code) {
+      document.getElementById("code").textContent = code;
+      var target = "tourtracker://join?code=" + encodeURIComponent(code);
+      document.getElementById("open").href = target;
+      // Try to open the app immediately; the button stays as fallback.
+      location.href = target;
+    }
+  </script>
+</body>
+</html>
